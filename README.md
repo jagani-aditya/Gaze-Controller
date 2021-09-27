@@ -2,6 +2,10 @@
 
 ## Project Desciption 
 
+<p align="center">
+  <img src="/Media/InMoov_Video.gif" alt="animated" />
+</p>
+
 ![](/Media/InMoov_Video.gif)
 
 When there is an interaction between a robot and a person, gaze control is very important for face-to-face communication. However, when a robot interacts with several people, neurorobotics plays an important role to determine the person to look at and those to pay attention to among the others. There are several factors which can influence the decision: who is speaking, who he/she is speaking to, where people are looking, if the user wants to attract attention, etc. This project implements an algorithm to detect, recognize people in frame, and pays attention to people who are speaking to enhance human-robot interaction. 

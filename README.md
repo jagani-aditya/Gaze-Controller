@@ -50,68 +50,6 @@ $ face_recognition ./pictures_of_people_i_know/ ./unknown_pictures/
 /face_recognition_test/unknown_pictures/unknown.jpg,unknown_person
 ```
 
-There's one line in the output for each face. The data is comma-separated
-with the filename and the name of the person found.
-
-An `unknown_person` is a face in the image that didn't match anyone in
-your folder of known people.
-
-#### `face_detection` command line tool
-
-The `face_detection` command lets you find the location (pixel coordinatates) 
-of any faces in an image.
-
-Just run the command `face_detection`, passing in a folder of images 
-to check (or a single image):
-
-```bash
-$ face_detection  ./folder_with_pictures/
-
-examples/image1.jpg,65,215,169,112
-examples/image2.jpg,62,394,211,244
-examples/image2.jpg,95,941,244,792
-```
-
-It prints one line for each face that was detected. The coordinates
-reported are the top, right, bottom and left coordinates of the face (in pixels).
- 
-##### Adjusting Tolerance / Sensitivity
-
-If you are getting multiple matches for the same person, it might be that
-the people in your photos look very similar and a lower tolerance value
-is needed to make face comparisons more strict.
-
-You can do that with the `--tolerance` parameter. The default tolerance
-value is 0.6 and lower numbers make face comparisons more strict:
-
-```bash
-$ face_recognition --tolerance 0.54 ./pictures_of_people_i_know/ ./unknown_pictures/
-
-/unknown_pictures/unknown.jpg,Barack Obama
-/face_recognition_test/unknown_pictures/unknown.jpg,unknown_person
-```
-
-If you want to see the face distance calculated for each match in order
-to adjust the tolerance setting, you can use `--show-distance true`:
-
-```bash
-$ face_recognition --show-distance true ./pictures_of_people_i_know/ ./unknown_pictures/
-
-/unknown_pictures/unknown.jpg,Barack Obama,0.378542298956785
-/face_recognition_test/unknown_pictures/unknown.jpg,unknown_person,None
-```
-
-##### More Examples
-
-If you simply want to know the names of the people in each photograph but don't
-care about file names, you could do this:
-
-```bash
-$ face_recognition ./pictures_of_people_i_know/ ./unknown_pictures/ | cut -d ',' -f2
-
-Barack Obama
-unknown_person
-```
 
 ##### Speeding up Face Recognition
 
@@ -149,26 +87,6 @@ face_locations = face_recognition.face_locations(image)
 See [this example](https://github.com/ageitgey/face_recognition/blob/master/examples/find_faces_in_picture.py)
  to try it out.
 
-You can also opt-in to a somewhat more accurate deep-learning-based face detection model.
-
-Note: GPU acceleration (via NVidia's CUDA library) is required for good
-performance with this model. You'll also want to enable CUDA support
-when compliling `dlib`.
-
-```python
-import face_recognition
-
-image = face_recognition.load_image_file("my_picture.jpg")
-face_locations = face_recognition.face_locations(image, model="cnn")
-
-# face_locations is now an array listing the co-ordinates of each face!
-```
-
-See [this example](https://github.com/ageitgey/face_recognition/blob/master/examples/find_faces_in_picture_cnn.py)
- to try it out.
-
-If you have a lot of images and a GPU, you can also
-[find faces in batches](https://github.com/ageitgey/face_recognition/blob/master/examples/find_faces_in_batches.py).
 
 ##### Automatically locate the facial features of a person in an image
 
@@ -185,31 +103,29 @@ face_landmarks_list = face_recognition.face_landmarks(image)
 See [this example](https://github.com/ageitgey/face_recognition/blob/master/examples/find_facial_features_in_picture.py)
  to try it out.
 
-##### Recognize faces in images and identify who they are
 
-```python
-import face_recognition
+#### Once you're done with installation
 
-picture_of_me = face_recognition.load_image_file("me.jpg")
-my_face_encoding = face_recognition.face_encodings(picture_of_me)[0]
+Run the ```face_recognition``` module by first navigating to ```examples``` directory
 
-# my_face_encoding now contains a universal 'encoding' of my facial features that can be compared to any other picture of a face!
-
-unknown_picture = face_recognition.load_image_file("unknown.jpg")
-unknown_face_encoding = face_recognition.face_encodings(unknown_picture)[0]
-
-# Now we can see the two face encodings are of the same person with `compare_faces`!
-
-results = face_recognition.compare_faces([my_face_encoding], unknown_face_encoding)
-
-if results[0] == True:
-    print("It's a picture of me!")
-else:
-    print("It's not a picture of me!")
-```
-
-See [this example](https://github.com/ageitgey/face_recognition/blob/master/examples/recognize_faces_in_pictures.py)
- to try it out.
+```$ python run_HRI.py ```
  
- 
+This should start the face_recognition module. Now we need to launch the arduino file located in ```arduino_test``` directory inside ```examples``` directory and upload the following code
+
+```arduino_test.ino```
+
+into your Arduino.
+
+#### Arduino Pin Configuration
+
+Two servos need to be attached. 
+
+For Servo 1; attach 
+
+```Digital Pin(Servo_1) --> Pin 10 ```
+```Digital Pin(Servo_2) --> Pin 9 ```
+
+
+
+
  

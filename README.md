@@ -2,6 +2,8 @@
 
 ## Project Desciption 
 
+![](/Media/InMoov_Video.gif)
+
 ## Platform
 * Python 3
 * Ubuntu 16.04 LTS
